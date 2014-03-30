@@ -2,9 +2,12 @@ package controllers
 
 import (
 	"bullhorn/app/models"
+	"errors"
 	"github.com/albrow/zoom"
 	"github.com/revel/revel"
 	"github.com/sfreiberg/gotwilio"
+	"net/url"
+	"strings"
 )
 
 type Broadcasts struct {
@@ -31,7 +34,7 @@ func (c Broadcasts) Create(body string, voice bool, sms bool) revel.Result {
 	if err := zoom.NewQuery("SMSSubscriber").Include("Phone").Scan(&smsSubs); err != nil {
 		return c.RenderError(err)
 	}
-	revel.INFO.Println(len(smsSubs), "SUBSCRIBERS")
+	revel.INFO.Println(len(smsSubs), "SMS SUBSCRIBERS")
 	for _, s := range smsSubs {
 		revel.INFO.Println("TO: ", s.Phone)
 		_, _, err := twilio.SendSMS("+19103780902", s.Phone, body, "", "")
@@ -46,14 +49,18 @@ func (c Broadcasts) Create(body string, voice bool, sms bool) revel.Result {
 	if err := zoom.NewQuery("VoiceSubscriber").Include("Phone").Scan(&voiceSubs); err != nil {
 		return c.RenderError(err)
 	}
-	revel.INFO.Println(len(voiceSubs), "SUBSCRIBERS")
+	revel.INFO.Println(len(voiceSubs), "VOICE SUBSCRIBERS")
 	for _, s := range voiceSubs {
 		revel.INFO.Println("TO: ", s.Phone)
-		callbackParams := gotwilio.NewCallbackParameters("http://107.170.105.233/say/" + body)
-		_, _, err := twilio.CallWithUrlCallbacks("+19103780902", s.Phone, callbackParams)
+		callbackParams := gotwilio.NewCallbackParameters("http://107.170.105.233/say/" + url.QueryEscape(body))
+		_, ex, err := twilio.CallWithUrlCallbacks("+19103780902", s.Phone, callbackParams)
 		if err != nil {
 			revel.ERROR.Println(err)
 			return c.RenderError(err)
+		}
+		if ex != nil {
+			revel.ERROR.Println(ex)
+			return c.RenderError(errors.New("Check error logs"))
 		}
 	}
 
@@ -62,5 +69,6 @@ func (c Broadcasts) Create(body string, voice bool, sms bool) revel.Result {
 }
 
 func (c Broadcasts) Say(message string) revel.Result {
+	message = strings.Replace(message, "+", " ", -1)
 	return c.Render(message)
 }
