@@ -1,0 +1,21 @@
+<h1>Index Page</h1>
+
+<table>
+  	<tr>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Phone</th>
+		<th>Actions</th>
+	</tr>
+  	{{range .users}}
+		<tr>
+			<td>{{.Name}}</td>
+			<td>{{.Email}}</td>
+			<td>{{.PrettyPhone}}</td>
+			<td>
+				<a href="/users/{{.Id}}/edit">Edit</a> |
+				<a href="/users/{{.Id}}/delete">Delete</a>
+			</td>
+		</tr>
+	{{end}}
+</table>

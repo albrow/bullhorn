@@ -1,0 +1,45 @@
+<h1>This is the new page</h1>
+
+{{if .errors}}
+<p class="form-errors">
+	Please fix errors marked below!
+</p>
+{{end}}
+
+<form action="/users" method="post">
+
+	{{with $field := field "user.Email" .}}
+		<p class="{{$field.ErrorClass}}">
+			<label for="{{$field.Name}}">Email:</label>
+			<input type="text" name="{{$field.Name}}" value="{{$field.Flash}}">
+			<span class="error">{{$field.Error}}</span>
+		</p>
+	{{end}}
+
+	{{with $field := field "user.Name" .}}
+		<p class="{{$field.ErrorClass}}">
+			<label for="{{$field.Name}}">Full Name:</label>
+			<input type="text" name="{{$field.Name}}" value="{{$field.Flash}}">
+			<span class="error">{{$field.Error}}</span>
+		</p>
+	{{end}}
+
+	{{with $field := field "user.Pass" .}}
+		<p class="{{$field.ErrorClass}}">
+			<label for="{{$field.Name}}">Password:</label>
+			<input type="password" name="{{$field.Name}}" value="{{$field.Flash}}">
+			<span class="error">{{$field.Error}}</span>
+		</p>
+	{{end}}
+
+	{{with $field := field "user.Phone" .}}
+		<p class="{{$field.ErrorClass}}">
+			<label for="{{$field.Name}}">Phone Number:</label>
+			<input type="text" name="{{$field.Name}}" value="{{$field.Flash}}">
+			<span class="error">{{$field.Error}}</span>
+		</p>
+	{{end}}
+
+
+	<button action="submit">Submit</button>
+</form>

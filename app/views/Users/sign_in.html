@@ -1,0 +1,35 @@
+<h1>Sign In Page</h1>
+
+{{if .errors}}
+<p class="form-errors">
+	Please fix errors marked below!
+</p>
+{{end}}
+
+{{if .flash.error}}
+	<p>
+		{{.flash.error}}
+	</p>
+{{end}}
+
+
+<form action="/users/sign_in" method="POST">
+	
+	{{with $field := field "email" .}}
+		<p class="{{$field.ErrorClass}}">
+			<label for="{{$field.Name}}">Email:</label>
+			<input type="text" name="{{$field.Name}}" value="{{$field.Flash}}">
+			<span class="error">{{$field.Error}}</span>
+		</p>
+	{{end}}
+
+	{{with $field := field "password" .}}
+		<p class="{{$field.ErrorClass}}">
+			<label for="{{$field.Name}}">Password:</label>
+			<input type="password" name="{{$field.Name}}" value="{{$field.Flash}}">
+			<span class="error">{{$field.Error}}</span>
+		</p>
+	{{end}}
+
+	<button action="submit">Submit</button>
+</form>

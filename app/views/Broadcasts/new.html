@@ -1,0 +1,23 @@
+<h1>Send a New Broadcast</h1>
+
+{{if .errors}}
+<p class="form-errors">
+	Please fix errors marked below!
+</p>
+{{end}}
+
+<form action="/broadcasts" method="post">
+
+	{{with $field := field "body" .}}
+		<p class="{{$field.ErrorClass}}">
+			<label for="{{$field.Name}}">Your Message:</label>
+			<br/>
+			<textarea name="{{$field.Name}}" value="{{$field.Flash}}" rows="6"></textarea>
+			<span class="error">{{$field.Error}}</span>
+		</p>
+	{{end}}
+
+	<input type="hidden" name="sms" value="true"></input>
+
+	<button action="submit">Submit</button>
+</form>

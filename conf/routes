@@ -1,0 +1,34 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+module:testrunner
+
+GET     /                                       App.Index
+
+# Ignore favicon requests
+GET     /favicon.ico                            404
+
+# Map static resources from the /app/public folder to the /public path
+GET     /public/*filepath                       Static.Serve("public")
+
+# Catch all
+# *       /:controller/:action                    :controller.:action
+
+# Resources
+# Users
+GET		/users/sign_in		Users.SignIn
+POST	/users/sign_in		Users.Authenticate
+GET 	/users 				Users.Index
+GET 	/users/new 			Users.New
+POST 	/users 				Users.Create
+GET		/users/:id/edit 	Users.Edit
+POST 	/users/:id 			Users.Update
+GET 	/users/:id/delete 	Users.Delete
+
+# Broadcasts
+GET 	/broadcasts/new 	Broadcasts.New
+POST 	/broadcasts 		Broadcasts.Create
+
+# Twilio WebHooks
+POST /subscribe/sms Twilio.SubscribeSMS

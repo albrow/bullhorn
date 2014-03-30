@@ -1,0 +1,44 @@
+<h1>Edit page</h1>
+
+{{if .errors}}
+<p class="form-errors">
+	Please fix errors marked below!
+</p>
+{{end}}
+
+<form action="/users/{{.user.Id}}" method="post">
+
+	<input type="hidden" name="user.Id" value="{{.user.Id}}">
+
+	<p class="">
+		<label for="user.Phone">Email:</label>
+		{{if index .flash "user.Email"}}
+			<input type="text" name="user.Email" value='{{index .flash "user.Email"}}'>
+		{{else}}
+			<input type="text" name="user.Email" value='{{.user.Email}}'>
+		{{end}}
+		<span class="error">{{index .errors "user.Email"}}</span>
+	</p>
+
+	<p class="">
+		<label for="user.Name">Email:</label>
+		{{if index .flash "user.Name"}}
+			<input type="text" name="user.Name" value='{{index .flash "user.Name"}}'>
+		{{else}}
+			<input type="text" name="user.Name" value='{{.user.Name}}'>
+		{{end}}
+		<span class="error">{{index .errors "user.Name"}}</span>
+	</p>
+
+	<p class="">
+			<label for="user.Phone">Email:</label>
+			{{if index .flash "user.Phone"}}
+				<input type="text" name="user.Phone" value='{{index .flash "user.Phone"}}'>
+			{{else}}
+				<input type="text" name="user.Phone" value='{{.user.PrettyPhone}}'>
+			{{end}}
+			<span class="error">{{index .errors "user.Phone"}}</span>
+		</p>
+
+	<button action="submit">Submit</button>
+</form>
