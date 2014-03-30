@@ -1,23 +1,36 @@
-<h1>Send a New Broadcast</h1>
+{{set . "title" "Bullhorn - New Broadcast"}}
+{{template "header.html" .}}
+{{template "navbar.html" .}}
 
-{{if .errors}}
-<p class="form-errors">
-	Please fix errors marked below!
-</p>
-{{end}}
+<div class="container">
+	<h1>Send a New Broadcast</h1>
 
-<form action="/broadcasts" method="post">
+	<div class="row">
+		<div class="col-md-6">
+			{{if .errors}}
+			<p class="form-errors">
+				Please fix errors marked below!
+			</p>
+			{{end}}
 
-	{{with $field := field "body" .}}
-		<p class="{{$field.ErrorClass}}">
-			<label for="{{$field.Name}}">Your Message:</label>
-			<br/>
-			<textarea name="{{$field.Name}}" value="{{$field.Flash}}" rows="6"></textarea>
-			<span class="error">{{$field.Error}}</span>
-		</p>
-	{{end}}
-
-	<input type="hidden" name="sms" value="true"></input>
-
-	<button action="submit">Submit</button>
-</form>
+			<form action="/broadcasts" method="post">
+				<div class="form-group">
+					{{with $field := field "body" .}}
+						<label for="{{$field.Name}}">Your Message:</label>
+						<br/>
+						<textarea class="form-control" name="{{$field.Name}}" value="{{$field.Flash}}" rows="6"></textarea>
+						<br/>
+						<span class="error">{{$field.Error}}</span>
+					{{end}}
+				</div>
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+		</div>
+		<div class="col-md-6">
+			<div class="subscribe-number">
+				<h3>Call or Text This Number:</h3>
+				<h1>(910) 378-0902</h1>
+			</div>
+		</div>
+	</div>
+</div>

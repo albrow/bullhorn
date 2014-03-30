@@ -29,6 +29,8 @@ GET 	/users/:id/delete 	Users.Delete
 # Broadcasts
 GET 	/broadcasts/new 	Broadcasts.New
 POST 	/broadcasts 		Broadcasts.Create
+GET		/say/:message		Broadcasts.Say
+POST	/say/:message		Broadcasts.Say
 
 # Twilio WebHooks
 POST /subscribe/sms Twilio.SubscribeSMS
