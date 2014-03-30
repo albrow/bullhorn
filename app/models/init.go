@@ -5,7 +5,10 @@ import (
 )
 
 func Init() error {
-	if err := zoom.Register(&Subscriber{}); err != nil {
+	if err := zoom.Register(&SMSSubscriber{}); err != nil {
+		return err
+	}
+	if err := zoom.Register(&VoiceSubscriber{}); err != nil {
 		return err
 	}
 	if err := zoom.Register(&User{}); err != nil {

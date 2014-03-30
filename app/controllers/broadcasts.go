@@ -25,7 +25,7 @@ func (c Broadcasts) Create(body string, voice bool, sms bool) revel.Result {
 	if sms {
 		revel.INFO.Println("SENDING...")
 		revel.INFO.Println("MESSAGE: ", body)
-		subscribers := make([]*models.Subscriber, 0)
+		subscribers := make([]*models.SMSSubscriber, 0)
 		if err := zoom.NewQuery("Subscriber").Include("Phone").Scan(&subscribers); err != nil {
 			return c.RenderError(err)
 		}

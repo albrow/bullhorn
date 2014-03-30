@@ -32,3 +32,5 @@ POST 	/broadcasts 		Broadcasts.Create
 
 # Twilio WebHooks
 POST /subscribe/sms Twilio.SubscribeSMS
+POST /receive/voice Twilio.ReceiveVoice
+POST /subscribe/voice Twilio.SubscribeVoice

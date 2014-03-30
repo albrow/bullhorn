@@ -1,0 +1,6 @@
+{{raw "<"}}?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Gather timeout="10" numDigits="1" action="/subscribe/voice">
+        <Say>Sorry. Please press 1 if you would like to receive updates about events and services from U M D, Otherwise, hang up.</Say>
+    </Gather>
+</Response>

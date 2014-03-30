@@ -1,0 +1,6 @@
+{{raw "<"}}?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Gather timeout="10" numDigits="1" action="/subscribe/voice">
+        <Say>Thanks for calling. You are currently signed up to receive updates from U M D, If you would like to stop receiving updates, press 2.</Say>
+    </Gather>
+</Response>
